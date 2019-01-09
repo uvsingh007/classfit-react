@@ -1,0 +1,16 @@
+
+
+
+nav.navbar.navbar-expand-md.navbar-light.bg-light {
+    background-color: #5f9094!important;
+    padding: 5px 0
+}
+
+.navLogo{
+    margin: 0 auto;
+    padding: 0
+}
+
+.navLogo img{
+    width: 120px
+}

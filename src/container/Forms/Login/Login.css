@@ -1,0 +1,10 @@
+
+
+.Login {
+    background-image: url(../../../assets/images/sgin-up.jpg);
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+}
