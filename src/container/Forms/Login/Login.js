@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 import Aux from '../../../hoc/Aux';
-// import axios from '../../../axios';
+import axios from '../../../axios';
 import { Form, FormGroup, Label, Input,  Container, Row, Col, Button } from 'reactstrap';
 import NavbarLogin from '../../../component/NavbarLogin/NavbarLogin';
 import './Login.css';
@@ -13,6 +13,12 @@ class Login extends Component {
       email: '',
       password: '',
       source: 'web',
+      DevID: "linux_Chrome_127.0.0.1", 
+      Lat: "30.0771",
+      Long: "31.2859",
+      PlyTkn: "",
+      ProjectKey: "1234",
+      ProjectSecret: "1234",
       error: ''
     };
 
@@ -28,40 +34,34 @@ class Login extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
+
+    if(!this.state.email) {
+      return this.setState({error: 'email is required'});
+    }
+    
+    if(!this.state.password) {
+      return this.setState({error: 'Password is required'});
+    }
     
     const data = {
       Email: this.state.email,
       Pass: this.state.password,
+      DevID: this.state.DevID,
+      Lat: this.state.Lat,
+      Long: this.state.Long,
+      PlyTkn: this.state.PlyTkn,
+      ProjectKey: this.state.ProjectKey,
+      ProjectSecret: this.state.ProjectSecret,
       source: this.state.source
-  };
-  const xmlHttp = new XMLHttpRequest();
-  xmlHttp.onreadystatechange = () =>
-  {
-      if(xmlHttp.readyState === 4 && xmlHttp.status === 200)
-      {
-          console.log(xmlHttp.responseText);
-      }
-  }
-  xmlHttp.open("post", "http://newclassfit.fastclassapp.com/c/PlyLogin", true); 
-  xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-  xmlHttp.send(data); 
-  console.log(data);
-  // axios.post('PlyLogin', data)
-  //     .then(
-  //       (response) => { console.log(response) }
-  //     )
-  //     .catch(
-  //       (error) => { console.log(error) }   
-  //     );
-
-
-      
-    if(!this.state.email) {
-      return this.setState({error: 'email is required'});
-    }
-    if(!this.state.password) {
-      return this.setState({error: 'Password is required'});
-    }
+    };
+    axios.post('/PlyLogin', data)
+      .then(
+        (response) => { console.log(response) 
+        console.log(this.state.ProjectKey)}
+      )
+      .catch(
+        (error) => { console.log(error) }   
+      );
 
     return this.setState({error: ''});
     
